@@ -1,7 +1,5 @@
 <?php
 
-require 'core/Database.php';
-
 class Job
 {
 	

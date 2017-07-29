@@ -1,6 +1,7 @@
 <?php 
 
 require 'core/Router.php';
+require 'core/Database.php';
 require 'core/Job.php';
 require 'core/Candidate.php';
 require 'controllers/PagesController.php';
