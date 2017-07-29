@@ -14,6 +14,7 @@ class Database
         try {
 
             return new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbName, $this->username, $this->password);
+            //return "Connected to DB";
 
         } catch(PDOException $exception) {
 

@@ -1,18 +1,17 @@
-<?php 
+<?php
+
+require 'core/Database.php';
 
 class Job
 {
-	private $connection;
 	
-	public function __construct($db) {
-        $this->connection = $db;
-    }
-
     public function getAll() {
 
     	$sql = "SELECT * FROM jobs";
-	   
-	    $result = $this->connection->query($sql);
+	   	
+	   	$db = new Database();
+	   	$connection = $db->make();
+	    $result = $connection->query($sql);
 	 
 	    return $result;
     }
@@ -20,9 +19,12 @@ class Job
     public function getOne($id){
  
 	    $sql = "SELECT * FROM jobs WHERE id = {$id}";
-	 	
-	    $result = $this->connection->query($sql);
+	 	//echo $sql;
+	 	$db = new Database();
+	 	$connection = $db->make();
+	    $result = $connection->query($sql);
 
+	    //var_dump($result);
 	    return $result;
  	}
 }

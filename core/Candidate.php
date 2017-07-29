@@ -2,17 +2,15 @@
 
 class Candidate
 {
-	private $connection;
-	
-	public function __construct($db) {
-        $this->connection = $db;
-    }
 
     public function getAll() {
 
     	$sql = "SELECT * FROM candidates";
-	    
-	    $result = $this->connection->query($sql);
+
+	    $db = new Database();
+	   	$connection = $db->make();
+
+	    $result = $connection->query($sql);
 	 
 	    return $result;
     }
@@ -21,7 +19,10 @@ class Candidate
  
 	    $sql = "SELECT * FROM candidates WHERE id = {$id}";
 	 	
-	    $result = $this->connection->query($sql);
+	 	$db = new Database();
+	   	$connection = $db->make();
+
+	    $result = $connection->query($sql);
 
 	    return $result;
  	}
@@ -30,7 +31,10 @@ class Candidate
  
 	    $sql = "SELECT * FROM candidates WHERE id LIKE '%{$id}%'";
 	 	
-	    $result = $this->connection->query($sql);
+	 	$db = new Database();
+	   	$connection = $db->make();
+
+	    $result = $connection->query($sql);
 
 	    return $result;
  	}

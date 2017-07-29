@@ -2,19 +2,27 @@
 
 class Router
 {
-	private $routes = [];
-
-	public function define($routes)
+	public function direct($uri, $controllerAcrion, $getValue, $uriBrowser)
 	{
-		$this->routes = $routes;
+
+		// var_dump($uri);
+	
+		if ($uri == $uriBrowser) {
+	
+		$contollerArr = explode("@", $controllerAcrion);
+		
+		return $this->callAction($contollerArr[0], $contollerArr[1], $getValue);
+		}
 	}
 
-	public function direct($uri)
+	protected function callAction($controller, $action, $getValue)
 	{
-		if (array_key_exists($uri, $this->routes)) {
-			return $this->routes[$uri];
+		
+		$controller = new $controller;
+		if (! method_exists($controller, $action)) {
+			throw new Exception("No controller or action");
 		}
-
-		throw new Exception("No path found!");
+		
+		return $controller->$action($getValue);
 	}
 }
