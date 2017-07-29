@@ -1,7 +1,10 @@
 <?php 
 
 require 'core/Router.php';
+require 'core/Database.php';
 
+$connection = new Database();
+$db = $connection->make();
 
 $router = new Router();
 

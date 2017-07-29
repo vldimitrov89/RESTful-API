@@ -8,27 +8,20 @@ class Job
         $this->connection = $db;
     }
 
-    public function readAll() {
+    public function getAll() {
 
     	$sql = "SELECT * FROM jobs";
-	    
-	    // podgotvqme zaqvkata
-	    $result = $this->connection->prepare($sql);
-	    
-	    // izpylnqvame
-	    $result->execute();
+	   
+	    $result = $this->connection->query($sql);
 	 
 	    return $result;
     }
 
-    public function readOne($id){
+    public function getOne($id){
  
 	    $sql = "SELECT * FROM jobs WHERE id = {$id}";
 	 	
-	    // podgotvqme zaqvkata
-	    $result = $this->connection->prepare($sql);
-	    // izpylnqvame
-	    $result->execute();
+	    $result = $this->connection->query($sql);
 
 	    return $result;
  	}

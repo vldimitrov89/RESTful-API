@@ -2,21 +2,18 @@
 
 class Database
 {
-	// informaciq za database-a
+	// database information
     private $host = "localhost";
     private $dbName = "rest_db";
     private $username = "root";
     private $password = "";
-    public $connection;
  
-    // metod za connection
-    public function getConnection(){
- 
-        $this->connection = null;
+    // connection method
+    public function make(){
  
         try {
 
-            $this->connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbName, $this->username, $this->password);
+            return new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbName, $this->username, $this->password);
 
         } catch(PDOException $exception) {
 
@@ -24,6 +21,5 @@ class Database
             
         }
  
-        return $this->connection;
     }
 }

@@ -1,43 +1,40 @@
 <?php 
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 
-//and database stuff
-require 'core/Database.php';
 require 'core/Candidate.php';
 
-$database = new Database();
-$db = $database->getConnection();
-
-//instanciq na Candidate
+//create instance of Candidate
 $candidate = new Candidate($db);
  
-//vadim vsichki candidates ot database-a
-$result = $candidate->readAll();
+//get all jobs from the database
+$result = $candidate->getAll();
 
-//broim kolko rezultata ima
+//count the results
 $numberResults = $result->rowCount();
 
 if($numberResults>0) {
  
- 	//array koito shte dyrji records
-    $candidateArr["records"]=array();
+ 	  //array that will hold records to pass to json_encode
+    $candidateArr["records"] = [];
  
 
     while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
 
-    	//$queries['id'] stava na $id i ostanalite
+    	//$queries['id'] will be $id ...
         extract($queries);
  		
-        $candidateItem=array(
+        $candidateItem=[
             "id" => $id,
             "name" => $name,
             "position" => $position,
             "created_on" => $created_on
-        );
+        ];
  
         array_push($candidateArr["records"], $candidateItem);
     }
  	
-    require "views/candidate_list.view.php";
+    echo json_encode($candidateArr);
 } else {
     echo json_encode(
         array("message" => "There are no candidates")

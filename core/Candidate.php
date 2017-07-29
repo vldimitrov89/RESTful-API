@@ -8,15 +8,11 @@ class Candidate
         $this->connection = $db;
     }
 
-    public function readAll() {
+    public function getAll() {
 
     	$sql = "SELECT * FROM candidates";
 	    
-	    // podgotvqme zaqvkata
-	    $result = $this->connection->prepare($sql);
-	    
-	    // izpylnqvame
-	    $result->execute();
+	    $result = $this->connection->query($sql);
 	 
 	    return $result;
     }
@@ -25,10 +21,7 @@ class Candidate
  
 	    $sql = "SELECT * FROM candidates WHERE id = {$id}";
 	 	
-	    // podgotvqme zaqvkata
-	    $result = $this->connection->prepare($sql);
-	    // izpylnqvame
-	    $result->execute();
+	    $result = $this->connection->query($sql);
 
 	    return $result;
  	}
@@ -37,10 +30,7 @@ class Candidate
  
 	    $sql = "SELECT * FROM candidates WHERE id LIKE '%{$id}%'";
 	 	
-	    // podgotvqme zaqvkata
-	    $result = $this->connection->prepare($sql);
-	    // izpylnqvame
-	    $result->execute();
+	    $result = $this->connection->query($sql);
 
 	    return $result;
  	}
