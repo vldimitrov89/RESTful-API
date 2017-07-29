@@ -4,6 +4,8 @@
 	<title>Candidate Search</title>
 </head>
 <body>
-	<h1>Page with Search Candidate</h1>
+	<?php 
+		echo json_encode($candidateArr);
+	 ?>
 </body>
 </html>

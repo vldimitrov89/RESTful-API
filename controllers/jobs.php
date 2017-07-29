@@ -8,7 +8,13 @@ $db = $database->getConnection();
 
 //instanciq na Job
 $job = new Job($db);
-$jobId = $_GET['id'];
+
+if (isset($_GET['id'])) {
+    $jobId = $_GET['id'];
+} else {
+    $jobId = NULL;
+}
+
 
 $result = $job->readOne($jobId);
 

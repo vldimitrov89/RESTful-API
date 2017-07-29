@@ -4,6 +4,8 @@
 	<title>Candidate List</title>
 </head>
 <body>
-	<h1>Page with Candidate list</h1>
+	<?php 
+		echo json_encode($candidateArr);
+	 ?>
 </body>
 </html>
