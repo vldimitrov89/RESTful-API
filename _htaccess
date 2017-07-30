@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteRule ^.*$ RESTful-API/index.php [NC]
+RewriteRule ^jobs/([0-9]+) RESTful-API/index.php/jobs.php?id=$1 [NC]
+RewriteRule ^jobs/list RESTful-API/index.php [NC]
+RewriteRule ^candidates/list RESTful-API/index.php [NC]
+RewriteRule ^candidates/review/([0-9]+) RESTful-API/index.php/candidates_review.php?id=$1 [NC]
+RewriteRule ^candidates/search/([0-9]+) RESTful-API/index.php/candidates_search.php?id=$1 [NC,L]
