@@ -5,7 +5,10 @@ class Candidate
 
     public function getAll() {
 
-    	$sql = "SELECT * FROM candidates";
+    	$sql = "SELECT candidates.id, candidates.name, jobs.position, candidates.created_on 
+    			FROM candidates 
+    			INNER JOIN jobs 
+    			ON candidates.position = jobs.id";
 
 	    $db = new Database();
 	   	$connection = $db->make();
