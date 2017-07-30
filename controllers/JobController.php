@@ -1,0 +1,66 @@
+<?php
+
+
+class JobController extends PagesController
+{
+	public function jobs($jobId)
+	{
+
+		//create instance of Job
+		$job = new Job();
+
+		//check for passed id
+
+		$result = $job->getOne($jobId);
+
+		//count the result from the query
+		$numberResults = $result->rowCount();
+		//var_dump($result);
+		if($numberResults>0) {
+		 
+		 	//array that will hold records to pass to json_encode
+		    $jobArr["records"] = [];
+		 
+
+		    while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
+		 
+		        array_push($jobArr["records"], $queries);
+		    }
+		 	
+		    echo json_encode($jobArr);
+		} else {
+		    echo json_encode(
+		        array("message" => "There are no jobs")
+		    );
+		}
+	}
+
+	public function jobsList()
+	{
+		$job = new Job();
+ 
+		//get all jobs from the database
+		$result = $job->getAll();
+
+		//count the results
+		$numberResults = $result->rowCount();
+
+		if($numberResults>0) {
+		 
+		 	//array that will hold records to pass to json_encode
+		    $jobArr["records"] = [];
+		 
+
+		    while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
+		 
+		        array_push($jobArr["records"], $queries);
+		    }
+		 	
+		    echo json_encode($jobArr);
+		} else {
+		    echo json_encode(
+		        array("message" => "There are no jobs")
+		    );
+		}
+	}
+}
