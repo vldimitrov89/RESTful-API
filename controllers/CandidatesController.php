@@ -2,92 +2,95 @@
 
 class CandidatesController extends PagesController
 {
-	public function candidatesList()
+	protected $modelName = 'Candidate';
+	protected $model = null;
+	
+	public function __construct(){
+		//create instance of Candidate
+		$this->model = new $this->modelName();
+	}
+	public function listAll()
 	{
 
-		//create instance of Candidate
-		$candidate = new Candidate();
-		 
 		//get all jobs from the database
-		$result = $candidate->getAll();
+		$result = $this->model->getAll();
 
 		//count the results
 		$numberResults = $result->rowCount();
 
-		if($numberResults>0) {
-		 
-		 	  //array that will hold records to pass to json_encode
-		    $candidateArr["records"] = [];
-		 
-
-		    while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
-		 
-		        array_push($candidateArr["records"], $queries);
-		    }
-		 	
-		    echo json_encode($candidateArr);
-		} else {
+		if($numberResults>0){
 		    echo json_encode(
 		        array("message" => "There are no candidates")
 		    );
+			return;
 		}
+		
+				 
+		  //array that will hold records to pass to json_encode
+		$candidateArr["records"] = [];
+	 
+
+		while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
+	 
+			array_push($candidateArr["records"], $queries);
+		}
+		
+		echo json_encode($candidateArr);
 	}
 
-	public function candidatesReview($candidateId)
+	public function getOne($candidateId)
 	{
-		$candidate = new Candidate();
 
 		//review a candidate from the database
-		$result = $candidate->review($candidateId);
+		$result = $this->model->review($candidateId);
 
 		//count the results
 		$numberResults = $result->rowCount();
 
-		if($numberResults>0) {
-		 
-		 	//array that will hold records to pass to json_encode
-		    $candidateArr["records"] = [];
-		 
-
-		    while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
-
-		        array_push($candidateArr["records"], $queries);
-		    }
-		 	
-		    echo json_encode($candidateArr);
-		} else {
+		if($numberResults>0) else {
 		    echo json_encode(
 		        array("message" => "There are no candidates")
 		    );
+			return ;
 		}
+		
+		//array that will hold records to pass to json_encode
+		$candidateArr["records"] = [];
+	 
+
+		while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
+
+			array_push($candidateArr["records"], $queries);
+		}
+		
+		echo json_encode($candidateArr);
 	}
 
-	public function candidatesSearch($candidateId)
+	public function search($candidateId)
 	{
-		//create instance of Candidate
-		$candidate = new Candidate();
 
 		//search candidates from the database
-		$result = $candidate->search($candidateId);
+		$result = $this->model->search($candidateId);
 
 		//count the results
 		$numberResults = $result->rowCount();
 
-		if($numberResults>0) {
-		 
-		 	//array that will hold records to pass to json_encode
-		    $candidateArr["records"] = [];
-		 
-		    while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
-		 
-		        array_push($candidateArr["records"], $queries);
-		    }
-		 	
-		    echo json_encode($candidateArr);
-		} else {
+		if($numberResults>0){
 		    echo json_encode(
 		        array("message" => "There are no candidates")
 		    );
+			return;
 		}
+		
+		
+		//array that will hold records to pass to json_encode
+		$candidateArr["records"] = [];
+	 
+		while ($queries = $result->fetch(PDO::FETCH_ASSOC)){
+	 
+			array_push($candidateArr["records"], $queries);
+		}
+		
+		echo json_encode($candidateArr);
 	}
 }

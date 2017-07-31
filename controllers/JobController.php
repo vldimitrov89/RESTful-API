@@ -1,9 +1,9 @@
 <?php
 
-
+// @TODO - Applay the same logic for JobController as CandidatesController
 class JobController extends PagesController
 {
-	public function jobs($jobId)
+	public function getOne($jobId)
 	{
 
 		//create instance of Job
@@ -35,7 +35,7 @@ class JobController extends PagesController
 		}
 	}
 
-	public function jobsList()
+	public function listAll()
 	{
 		$job = new Job();
  
@@ -62,5 +62,9 @@ class JobController extends PagesController
 		        array("message" => "There are no jobs")
 		    );
 		}
+	}
+	
+	public  function search(){
+		echo json_encode(["message"=>"Not implemented yet"]);
 	}
 }

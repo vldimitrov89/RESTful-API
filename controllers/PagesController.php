@@ -1,14 +1,22 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
 
-class PagesController
+
+abstract class PagesController
 {
+	
+	public function __construct(){
+		
+	}
 
 	public function home()
 	{
-		echo "Welcome to the Home Page!";
+		echo json_encode(
+		        array("message" => "This is the home page")
+		    );
 
 	}
 
+	public abstract function listAll();
+	public abstract function getOne();
+	public abstract function search();
 }
